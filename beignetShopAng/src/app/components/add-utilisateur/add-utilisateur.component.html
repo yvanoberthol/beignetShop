@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h1 class="text-center">Ajouter un utilisateur</h1>
+    <form [formGroup]="formAddUtilisateur">
+      <div class="form-group text-center">
+        <input type="text" placeholder="Nom complet" formControlName="nomComplet"
+               id="nomComplet" class="form-control form-control-lg">
+      </div>
+      <div class="form-group text-center">
+        <input type="number" placeholder="Numéro de téléphone" formControlName="phoneNumber"
+               id="phoneNumber" class="form-control form-control-lg">
+      </div>
+      <div class="form-group text-center">
+        <input type="email" placeholder="Email" formControlName="email"
+               id="email" class="form-control form-control-lg">
+      </div>
+      <div class="form-group text-center">
+        <input type="text" placeholder="Login" formControlName="username"
+               id="login" class="form-control form-control-lg">
+      </div>
+      <div class="form-group text-center">
+        <input type="password" placeholder="Mot de passe" formControlName="password"
+               id="password" class="form-control form-control-lg">
+      </div>
+      <div class="form-group">
+        <label for="role" class="h5">Role</label>
+        <select name="role" id="role" formControlName="role"
+                class="form-control form-control-lg">
+          <option value="client">Client</option>
+          <option value="admin">Administrateur</option>
+        </select>
+      </div>
+      <div class="form-group h5">
+        <input type="checkbox" formControlName="active"> Actif
+      </div>
+      <div class="form-group text-center">
+        <button (click)="addUtilisateur(formAddUtilisateur)" class="btn btn-lg btn-info form-control"
+                [disabled]="formAddUtilisateur.invalid">
+          <i class="fa fa-save"></i> Enregistrer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover table-bordered">
+      <tr class="font-weight-bolder h5">
+        <td>Nom complet</td>
+        <td>N° Téléphone</td>
+        <td>Email</td>
+        <td>Rôle</td>
+        <td>Status</td>
+        <td>Actions</td>
+      </tr>
+      <tr *ngFor="let utilisateur of utilisateurs">
+        <td>{{utilisateur.nomComplet}}</td>
+        <td>{{utilisateur.phoneNumber}}</td>
+        <td>{{utilisateur.email}}</td>
+        <td>{{utilisateur.role}}</td>
+        <td>
+          <button *ngIf="utilisateur.active" (click)="toggleStatus(utilisateur.id,!utilisateur.active)" class="badge badge-success" >
+            Activé
+          </button>
+          <button *ngIf="!utilisateur.active" (click)="toggleStatus(utilisateur.id,!utilisateur.active)" class="badge badge-danger" >
+            Désactivé
+          </button>
+        </td>
+        <td>
+          <button class="btn rounded-circle btn-primary">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button (click)="deleteUtilisateur(utilisateur.id)" class="btn rounded-circle btn-danger ml-1">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="!utilisateurs">
+        <td class="text-center text-danger h6" colspan="8">Aucun utilisateur enregistré...</td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <form [formGroup]="formUpdateUtilisateur">
+      <div class="form-group text-center">
+        <input type="text" placeholder="Nom complet" formControlName="nomComplet"
+               id="nomComplet" class="form-control form-control-lg">
+      </div>
+      <div class="form-group text-center">
+        <input type="number" placeholder="Numéro de téléphone" formControlName="phoneNumber"
+               id="phoneNumber" class="form-control form-control-lg">
+      </div>
+      <div class="form-group text-center">
+        <input type="email" placeholder="Email" formControlName="email"
+               id="email" class="form-control form-control-lg">
+      </div>
+      <div class="form-group text-center">
+        <input type="text" placeholder="Login" formControlName="username"
+               id="login" class="form-control form-control-lg">
+      </div>
+      <div class="form-group text-center">
+        <input type="password" placeholder="Mot de passe" formControlName="password"
+               id="password" class="form-control form-control-lg">
+      </div>
+      <div class="form-group text-center">
+        <button (click)="updateUtilisateur(formUpdateUtilisateur)" class="btn btn-lg btn-info form-control"
+                [disabled]="formUpdateUtilisateur.invalid">
+          <i class="fa fa-edit"></i> Mettre à jour
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

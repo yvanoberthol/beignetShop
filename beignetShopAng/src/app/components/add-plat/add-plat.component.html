@@ -1,0 +1,25 @@
+<h2 class="text-center text-secondary">Créer un plat</h2>
+<div class="alert alert-danger" *ngIf="platVide">
+  <i class="fa fa-close"></i> Tu ne peux pas mettre un plat vide dans ton panier.
+</div>
+<div class="alert alert-danger" *ngIf="montantInvalide">
+  <i class="fa fa-close"></i> Vous avez un montant invalide pour un produit.
+</div>
+<form *ngFor="let produit of produits" [formGroup]="lignePlatsFormGroup[produit.libelle]">
+  <table class="table table-striped">
+    <tr>
+      <td class="font-weight-bolder">
+        <label>{{produit.libelle}}</label>
+      </td>
+      <td>
+        <input class="form-control" type="number" formControlName="montant">
+        <p class="text-info h7">Prix minimum : {{produit.prix}}</p>
+      </td>
+    </tr>
+  </table>
+</form>
+<div class="text-center">
+  <button class="btn btn-lg btn-info" (click)="addPlat(lignePlatsFormGroup)">
+    <i class="fa fa-save"></i> Ajouter au panier
+  </button>
+</div>

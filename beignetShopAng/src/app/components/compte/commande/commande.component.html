@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped" *ngIf="commandes">
+      <tr class="font-weight-bold">
+        <td>Code</td>
+        <td>Date</td>
+        <td>Montant</td>
+        <td>Lieu de livraison</td>
+      </tr>
+      <tr *ngFor="let commande of commandes">
+        <td>{{commande.code}}</td>
+        <td>{{commande.date| date: 'dd MMM yyyy'}}</td>
+        <td>{{commande.montant}}</td>
+        <td>{{commande.adresseLivraison.quartier}}</td>
+      </tr>
+    </table>
+    <div class="alert alert-info" *ngIf="!commandes">
+      <i class="fa fa-info-circle"></i> Aucune commande enregistrée
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      <h2 class="text-center text-secondary">
+       <i class="fa fa-shopping-basket"></i> Panier N° #{{panier.code | slice:0:5}}
+      </h2>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" *ngIf="panier?.plats.length > 0">
+        <tr class="font-weight-bolder">
+          <td>code du plat</td>
+          <td>montant</td>
+          <td></td>
+        </tr>
+        <tr *ngFor="let plat of panier?.plats">
+          <td>
+            <button (click)="setId(plat.id)">
+            {{plat.code}}
+            </button>
+            <div [class.show]="(id==plat.id && show)" class="tooltip bs-tooltip-bottom" role="tooltip">
+              <div class="arrow"></div>
+              <div class="tooltip-inner">
+                <ul>
+                  <li *ngFor="let lignePlat of plat.lignePlats | montantZeroOff">
+                      {{lignePlat?.produit.libelle}} : {{lignePlat?.montant}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span>{{plat.montant}}</span>
+          </td>
+          <td>
+            <button (click)="deletePlat(plat.id)" class="btn btn-danger">
+              <i class="fa fa-minus"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="alert alert-info text-right h5" *ngIf="panier?.plats.length > 0">
+      <span> <i class="fa fa-money"></i> Montant total: </span> <span class="font-weight-bolder">{{montantTotal}} XAF</span>
+    </div>
+    <div class="text-center" *ngIf="panier?.plats.length > 0">
+      <button *ngIf="!showButton" (click)="slidePayement('true')" class="btn btn-outline-success h4 font-weight-bolder">
+        <i class="fa fa-shopping-basket"></i> Soumettre votre panier
+      </button>
+      <button *ngIf="showButton" (click)="slidePayement('false')" class="btn btn-primary h4 font-weight-bolder">
+        <i class="fa fa-arrow-left"></i> Créer un nouveau plat
+      </button>
+    </div>
+    <div class="text-center alert alert-info" *ngIf="panier?.plats.length == 0">
+     <i class="fa fa-info-circle"></i> Votre panier est vide pour l'instant
+    </div>
+  </div>
+</div>

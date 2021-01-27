@@ -1,0 +1,70 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      <h2 class="text-center text-secondary">
+       <i class="fa fa-money"></i> Paiement
+      </h2>
+    </div>
+    <div class="card-body">
+      <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#addAdresse" role="button" aria-expanded="false"
+           aria-controls="addAdresse">
+          <i class="fa fa-plus"> Créer une adresse de livraison</i>
+        </a>
+      </p>
+      <div class="row collapse" id="addAdresse">
+        <div class="col">
+          <div >
+            <div class="card card-body">
+              <form [formGroup]="formAddAdresse">
+                <div class="form-group">
+                  <label>Quartier</label>
+                  <input type="text" class="form-control" formControlName="quartier">
+                </div>
+                <div class="form-group">
+                  <label>Numéro du bloc</label>
+                  <input type="number" class="form-control" formControlName="numBlock">
+                </div>
+                <div class="form-group">
+                  <label>Numéro de la case</label>
+                  <input type="number" class="form-control" formControlName="numCase">
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary" [disabled]="formAddAdresse.invalid" (click)="addAdresseLivraison(formAddAdresse)">
+                    Créer
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2" *ngIf="adresseLivraisons">
+        <form>
+          <div class="form-group">
+            <label for="adresseLivraison">Sélectionnez une adresse de livraison</label>
+            <select class="form-control" name="adresseLivraison" id="adresseLivraison"  [(ngModel)]="adresseLivraisonId">
+              <option class="font-weight-bold" *ngFor="let adresse of adresseLivraisons"
+                      value="{{adresse.id}}">
+                {{adresse.quartier}}(Bloc {{adresse.numBlock}} - Case {{adresse.numCase}})
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button [disabled]="!adresseLivraisonId" (click)="creerCommande()" class="btn btn-outline-success h4 font-weight-bolder">
+              <i class="fa fa-shopping-cart"></i> Commander
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="row mt-2" *ngIf="!adresseLivraisons">
+        <div class="col-md-12">
+          <div class="text-center h6 alert alert-primary">
+           <i class="fa fa-info-circle"></i> Aucune adresse de livraison n'a été enregistrée
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

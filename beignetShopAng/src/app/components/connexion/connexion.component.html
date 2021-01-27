@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-info">
+      <p class="text-center">
+        <span class="h3">Bienvenue sur notre plateforme BeignetShop.</span><br>
+        <span class="h6">Ici nous vous proposons de passer vos commandes en ligne</span>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-header alert alert-secondary">
+        <div class="card-title text-center">
+          <span class="h2"> <i class="fa fa-user-circle"></i> Connexion</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-danger text-center" *ngIf="msgError">
+          <span class="h6">
+            <i class="fa fa-close"></i> Login ou mot de passe incorrect
+          </span>
+        </div>
+        <form [formGroup]="formLogin">
+          <div class="form-group">
+            <label for="login">Nom d'utilisateur</label>
+            <input type="text" id="login" formControlName="username"
+                   class="form-control form-control-lg">
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" formControlName="password"
+                   class="form-control form-control-lg">
+          </div>
+          <div class="form-group">
+            <button (click)="connexion(formLogin)" [disabled]="formLogin.invalid" class="btn btn-lg btn-primary form-control">
+             <span class="fa fa-sign-in"></span> Se connecter
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
